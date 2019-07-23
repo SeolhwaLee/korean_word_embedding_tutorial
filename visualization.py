@@ -3,7 +3,7 @@ from gensim.models import Word2Vec
 import re
 
 def main():
-    model = Word2Vec.load('./sample_data/wiki_en_model')
+    model = Word2Vec.load('./korean_word_embedding_tutorial/wiki_ko_model')
 
     try:
         num_rows = len(model.vocab)
@@ -16,8 +16,8 @@ def main():
     global tensor_out_fn
     global labels_out_fn
 
-    tensor_out_fn = './sample_data/wiki_en_model_%d_%dd_tensors.tsv' % (num_rows, dim)
-    labels_out_fn = './sample_data/wiki_en_model_%d_%dd_labels.tsv' % (num_rows, dim)
+    tensor_out_fn = './visualization/wiki_ko_model_%d_%dd_tensors.tsv' % (num_rows, dim)
+    labels_out_fn = './visualization/wiki_ko_model_%d_%dd_labels.tsv' % (num_rows, dim)
 
     try:
         labels_out = open(labels_out_fn, 'w', encoding='utf-8')
@@ -41,9 +41,9 @@ def main():
         wv_list.append(ww)
 
         try:
-            labels_out.write('%s\t%s\t%s\n' % (wd, 'en', model.vocab[wd].count))
+            labels_out.write('%s\t%s\t%s\n' % (wd, 'ko', model.vocab[wd].count))
         except:
-            labels_out.write(('%s\t%s\t%s\n' % (wd, 'en', model.vocab[wd].count)).encode('utf-8'))
+            labels_out.write(('%s\t%s\t%s\n' % (wd, 'ko', model.vocab[wd].count)).encode('utf-8'))
 
     with open(tensor_out_fn, 'w') as fw:
         for i in wv_list:
